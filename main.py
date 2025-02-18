@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
+import os
 
 app = FastAPI()
 
@@ -55,7 +56,8 @@ def generate_executive_report(data: ReportRequest):
         "recommendations": "Acciones recomendadas: Optimizar presencia digital y mejorar la experiencia del cliente."
     }
 
-# Ejecutar el servidor localmente
+# Ejecutar el servidor localmente o en Render
 if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 10000))  # Usa el puerto de Render o 10000 por defecto
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=port)
